@@ -249,7 +249,8 @@ config.configFile(process.argv[2], function (config) {
             timers[key].push(Number(fields[0] || 0));
             timer_counters[key] += (1 / sampleRate);
           } else if (metric_type === "g") {
-            if (gauges[key] && fields[0].match(/^[-+]/)) {
+            if (fields[0].match(/^[-+]/)) {
+              if(!gauges[key]) gauges[key] = 0;
               gauges[key] += Number(fields[0] || 0);
             } else {
               gauges[key] = Number(fields[0] || 0);
